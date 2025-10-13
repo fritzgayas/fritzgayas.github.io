@@ -34,7 +34,7 @@ section {
     padding: 10rem 9% 2rem;
 }
 
-/* Header */
+/* Header Section Code */
 .header {
     position: fixed;
     width: 100%;
@@ -82,7 +82,7 @@ section {
     display: none;
 }
 
-/* Home Section */
+/* Home Section Code */
 .home {
     display: flex;
     justify-content: center;
@@ -178,7 +178,7 @@ section {
     box-shadow: 0 0 2rem rgba(0,191,166,0.5);
 }
 
-/* About Section */
+/* About Section Code */
 .about {
     display: flex;
     align-items: center;
@@ -230,4 +230,48 @@ section {
     font-size: 1.6rem;
     margin: 2rem 0 3rem;
     color: var(--text-color);
+}
+
+/* Projects Section Code */
+
+.projects h2 {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.projects-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.projects-container .projects-box {
+    flex: 1 1 30rem;
+    background: var(--header-bg);
+    padding: 6rem 2rem 6rem;
+    border-radius: 2rem;
+    text-align: center;
+    border: 0.3rem solid var(--snd-bg-gradient);
+    transition: 0.3 ease;
+}
+
+.projects-container .projects-box:hover {
+    border-color: var(--header-text);
+    transform: scale(1.02);
+}
+
+.projects-box i {
+    font-size: 7rem;
+    color: var(--main-gradient);
+}
+
+.projects-box h3 {
+    font-size: 2.6rem;
+}
+
+.projects-box p {
+    font-size: 1.6rem;
+    margin: 1rem 0 3rem;
 }
