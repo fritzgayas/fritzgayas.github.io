@@ -372,14 +372,14 @@ span {
 
 /* TS8. Category labels */
 .carousel-container {
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
 }
 
 .category-label {
     font-size: 2.8rem;
-    color: var(--main-color);
+    color: var(--text-color);
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     position: relative;
 }
 
