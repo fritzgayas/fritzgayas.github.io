@@ -191,6 +191,7 @@ span {
     justify-content: center;
     gap: 2rem;
     background: var(--snd-bg-color);
+    text-align: justify;
 }
 
 .about-img img {
@@ -199,16 +200,16 @@ span {
     object-fit: cover;
     object-position: top center;
     border-radius: 50%;
-    border: 2px solid #00bfa6;
-    box-shadow: 0 0 25px rgba(0,127,115,0.5);
+    border: 2px solid #0077b6;
+    box-shadow: 0 0 25px rgba(0, 119, 182, 0.5);
     cursor: pointer;
     transition: 0.4s ease;
 }
 
 .about-img img:hover {
-    box-shadow: 0 0 25px rgba(0,127,115,0.6),
-                0 0 35px rgba(0,191,166,0.5),
-                0 0 45px rgba(0,191,166,0.4);
+    box-shadow: 0 0 25px rgba(0, 119, 182, 0.6),
+                0 0 35px rgba(0, 119, 182, 0.5),
+                0 0 45px rgba(0, 119, 182, 0.4);
 }
 
 .heading {
@@ -238,7 +239,244 @@ span {
     color: var(--text-color);
 }
 
+/* Tech Stack Section Code */
+
+.techstack {
+    background: var(--bg-color);
+    padding: 10rem 9% 2rem;
+    text-align: center;
+}
+
+.tech-header {
+    margin-bottom: 5rem;
+}
+
+.tech-header h2 {
+    font-size: 6rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tech-header h3 {
+    font-size: 2rem;
+    color: var(--text-color);
+    max-width: 80rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* TS1. Carousel Base Styles */
+.carousel {
+    margin: 4rem auto;
+    width: 100%;
+    max-width: 120rem;
+    overflow: hidden;
+    position: relative;
+    mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent);
+    -webkit-mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent);
+}
+
+.carousel-inner {
+    display: flex;
+    width: max-content;
+    animation: scroll 30s infinite linear;
+}
+
+.group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+/* TS2. Dynamic gap system based on item count */
+.carousel-container .group {
+    gap: calc(4rem - (var(--item-count, 4) * 0.25rem));
+}
+
+/* TS3. Card styles with dynamic sizing */
+.card {
+    height: 14rem;
+    background: var(--bg-color);
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 0.2rem solid var(--snd-bg-color);
+    transition: all 0.4s ease;
+    flex-shrink: 0;
+}
+
+/* TS4. Dynamic card width based on item count */
+.carousel-container[data-items="4"] .card {
+    flex: 0 0 22rem;
+    --item-count: 4;
+}
+.carousel-container[data-items="5"] .card {
+    flex: 0 0 18rem;
+    --item-count: 5;
+}
+.carousel-container[data-items="6"] .card {
+    flex: 0 0 16rem;
+    --item-count: 6;
+}
+.carousel-container[data-items="7"] .card {
+    flex: 0 0 14rem;
+    --item-count: 7;
+}
+.carousel-container[data-items="8"] .card {
+    flex: 0 0 13rem;
+    --item-count: 8;
+}
+
+.card:hover {
+    border-color: var(--main-color);
+    box-shadow: 0 12px 30px rgba(0, 119, 182, 0.25);
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: 0.4s ease;
+    filter: grayscale(20%);
+}
+
+.card:hover img {
+    transform: scale(1.15);
+    filter: grayscale(0%);
+}
+
+/* TS5. Group spacing - proportional to card gap */
+.carousel-inner .group:not(:last-child) {
+    margin-right: calc(4rem - (var(--item-count, 4) * 0.25rem));
+}
+
+/* TS6. Animation that accounts for group spacing */
+@keyframes scroll {
+    0% { 
+        transform: translateX(0); 
+    }
+    100% { 
+        transform: translateX(calc(-50% - (var(--group-gap, 2rem) / 2))); 
+    }
+}
+
+/* TS7. Set group gap CSS variable */
+.carousel-container .carousel-inner {
+    --group-gap: calc(4rem - (var(--item-count, 4) * 0.25rem));
+}
+
+/* TS8. Category labels */
+.carousel-container {
+    margin-bottom: 8rem;
+}
+
+.category-label {
+    font-size: 2.8rem;
+    color: var(--main-color);
+    font-weight: 700;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.category-label::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6rem;
+    height: 0.3rem;
+    background: var(--main-color);
+    border-radius: 1rem;
+}
+
+/* TS9. Responsive adjustments with proportional scaling */
+@media (max-width: 1200px) {
+    .carousel-container[data-items="4"] .card { flex: 0 0 20rem; }
+    .carousel-container[data-items="5"] .card { flex: 0 0 16rem; }
+    .carousel-container[data-items="6"] .card { flex: 0 0 14rem; }
+    .carousel-container[data-items="7"] .card { flex: 0 0 12rem; }
+    .carousel-container[data-items="8"] .card { flex: 0 0 11rem; }
+    
+    .carousel-container .group {
+        gap: calc(3.5rem - (var(--item-count, 4) * 0.2rem));
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container[data-items="4"] .card { 
+        flex: 0 0 18rem; 
+        height: 12rem;
+        padding: 1.5rem;
+    }
+    .carousel-container[data-items="5"] .card { 
+        flex: 0 0 15rem;
+        height: 12rem;
+        padding: 1.5rem;
+    }
+    .carousel-container[data-items="6"] .card { 
+        flex: 0 0 13rem;
+        height: 12rem;
+        padding: 1.5rem;
+    }
+    .carousel-container[data-items="7"] .card { 
+        flex: 0 0 11rem;
+        height: 12rem;
+        padding: 1.5rem;
+    }
+    .carousel-container[data-items="8"] .card { 
+        flex: 0 0 10rem;
+        height: 12rem;
+        padding: 1.5rem;
+    }
+    
+    .carousel-container .group {
+        gap: calc(3rem - (var(--item-count, 4) * 0.15rem));
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-container[data-items="4"] .card { 
+        flex: 0 0 16rem;
+        height: 10rem;
+        padding: 1rem;
+    }
+    .carousel-container[data-items="5"] .card { 
+        flex: 0 0 13rem;
+        height: 10rem;
+        padding: 1rem;
+    }
+    .carousel-container[data-items="6"] .card { 
+        flex: 0 0 11rem;
+        height: 10rem;
+        padding: 1rem;
+    }
+    .carousel-container[data-items="7"] .card { 
+        flex: 0 0 10rem;
+        height: 10rem;
+        padding: 1rem;
+    }
+    .carousel-container[data-items="8"] .card { 
+        flex: 0 0 9rem;
+        height: 10rem;
+        padding: 1rem;
+    }
+    
+    .carousel-container .group {
+        gap: calc(2.5rem - (var(--item-count, 4) * 0.1rem));
+    }
+}
+
 /* Projects Section Code */
+
+.projects {
+    background: var(--snd-bg-color);
+}
 
 .projects h2 {
     text-align: center;
@@ -255,7 +493,7 @@ span {
 
 .projects-container .projects-box {
     flex: 1 1 30rem;
-    background: var(--header-bg);
+    background: var(--bg-color);
     padding: 6rem 2rem 6rem;
     border-radius: 2rem;
     text-align: center;
@@ -280,74 +518,6 @@ span {
 .projects-box p {
     font-size: 1.6rem;
     margin: 1rem 0 3rem;
-}
-
-/* Tech Stack Section Code */
-
-.techstack {
-    background: var(--snd-bg-color);
-}
-
-.techstack-box {
-    background: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.techstack .heading {
-    margin-bottom: 5rem;
-}
-
-.techstack-box img {
-    width: 15rem;
-    border-radius: 50%;
-    border: 3px solid var(--main-color);
-    box-shadow: 0 0 25px var(--main-color);
-}
-
-.wrapper {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 3rem;
-}
-
-.techstack-item {
-    min-height: 450px;
-    max-width: 450px;
-    background: var(--bg-color);
-    border: 0.3rem solid var(--bg-color);
-    border-radius: 2rem;
-    margin: 0 2rem;
-    padding: 20px 20px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-    color: var(--text-color);
-    transition: 0.3s ease;
-}
-
-.techstack-item:hover {
-    border-color: var(--main-color);
-    transform: scale(1.02);
-}
-
-.techstack-item h2 {
-    font-size: 3rem;
-}
-
-.techstack-item p {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-#star {
-    color: gold;
-    font-size: 2rem;
 }
 
 /* Contact Section Code */
