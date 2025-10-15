@@ -476,17 +476,19 @@ span {
 
 .projects {
     background: var(--snd-bg-color);
+    padding: 5rem 2rem; /**/
 }
 
 .projects h2 {
     text-align: center;
     margin-bottom: 5rem;
+    font-size: 3rem; /**/
 }
 
 .projects-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch; /*from center*/
     flex-wrap: wrap;
     gap: 2rem;
 }
@@ -494,16 +496,31 @@ span {
 .projects-container .projects-box {
     flex: 1 1 30rem;
     background: var(--bg-color);
-    padding: 6rem 2rem 6rem;
+    padding: 2rem; /*from 6rem 2rem 6rem*/
     border-radius: 2rem;
     text-align: center;
     border: 0.3rem solid var(--snd-bg-color);
     transition: 0.3 ease;
+    /*add on*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 35rem;
+    min-height: 550px; 
 }
 
 .projects-container .projects-box:hover {
     border-color: var(--main-color);
     transform: scale(1.02);
+}
+
+/* Additional for Image styling */
+.projects-box img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .projects-box i {
@@ -512,12 +529,21 @@ span {
 }
 
 .projects-box h3 {
-    font-size: 2.6rem;
+    font-size: 2.2rem; /* from 2.6 rem */
+    margin-bottom: 1rem;
 }
 
+/*
 .projects-box p {
     font-size: 1.6rem;
     margin: 1rem 0 3rem;
+} */
+
+.projects-box p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  flex-grow: 1; /* helps balance height between cards */
 }
 
 /* Contact Section Code */
@@ -635,11 +661,8 @@ span {
     section {
         padding: 10rem 3%;
     }
-    .services {
+    .projects {
         padding: 7rem;
-    }
-    .testimonial .wrapper {
-        grid-template-columns: repeat(1,1fr);
     }
     .contact form .input-box input {
         width: 100%;
