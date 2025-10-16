@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Initialize EmailJS 
+/* EmailJS */
 (function() {
   emailjs.init({
     publicKey: "B0r4Ve0znHWpK9Rg_"   // Replace with your actual Public Key from EmailJS
@@ -127,3 +127,31 @@ function sendMail() {
       alert("Failed to send message. Please try again.");
     });
 }
+
+/* Loading Screen */
+window.addEventListener("load", () => {
+  const loadingScreen = document.getElementById("loading-screen");
+  const progressBar = document.getElementById("progress-bar");
+  const progressText = document.getElementById("progress-text");
+  const chargerIcon = document.getElementById("charger-icon");
+
+  let progress = 0;
+
+  const interval = setInterval(() => {
+    if (progress < 100) {
+      progress++;
+      progressBar.style.width = progress + "%";
+      progressText.textContent = progress + "%";
+
+      // Move the ⚡ icon along with the bar
+      chargerIcon.style.left = progress + "%";
+    } else {
+      clearInterval(interval);
+
+      // Fade out after reaching 100%
+      setTimeout(() => {
+        loadingScreen.classList.add("hidden");
+      }, 600);
+    }
+  }, 20);
+});
