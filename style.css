@@ -640,12 +640,6 @@ span {
     color: var(--text-color)
 }
 
-.footer .footer-iconTop {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 /* Responsive Design Code */
 
 @media (max-width: 1200px) {
