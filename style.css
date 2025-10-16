@@ -496,8 +496,16 @@ span {
 
 .projects h2 {
     text-align: center;
-    margin-bottom: 5rem;
-    font-size: 3rem; /**/
+    margin-bottom: 1rem;
+}
+
+.projects .subheading {
+    font-size: 2rem;
+    color: var(--text-color);
+    max-width: 80rem;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 .projects-container {
@@ -582,7 +590,6 @@ span {
     color: var(--text-color);
     margin-top: -2rem;    /* pulls it closer to the heading */
     margin-bottom: 2.5rem;
-    opacity: 0.8;
 }
 
 .contact form {

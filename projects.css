@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background: #e6f0ff; /* light blue background for consistency */
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+/* Back button */
+header {
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center;     /* centers vertically if header has height */
+}
+
+.back-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #007BFF;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.back-btn:hover {
+  color: #0056b3;
+}
+
+/* Main project content */
+.project-details {
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.08);
+}
+
+.project-details h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #003d80;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.project-details img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.project-details p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+/* List for features or highlights */
+.project-details ul {
+  list-style-type: none;
+  margin-bottom: 30px;
+  text-align: justify;
+}
+
+.project-details li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 10px;
+}
+
+.project-details li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #007BFF;
+  font-weight: bold;
+}
+
+/* Read More or Back Button */
+.btn {
+  display: inline-block;
+  background: #007BFF;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+.project-details .btn {
+  display: inline-block;
+  margin: 0 auto;  /* centers block element horizontally */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .project-details {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .project-details h1 {
+    font-size: 1.8rem;
+  }
+
+  .project-details p {
+    font-size: 0.95rem;
+  }
+}
