@@ -98,3 +98,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 250);
     });
 });
+
+// Initialize EmailJS 
+(function() {
+  emailjs.init({
+    publicKey: "B0r4Ve0znHWpK9Rg_"   // Replace with your actual Public Key from EmailJS
+  });
+})();
+
+function sendMail() {
+  const parms = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    number: document.getElementById("number").value,
+    subject: document.getElementById("subject").value,
+    message: document.getElementById("message").value
+  };
+
+  emailjs
+    .send("service_qr9fwrt", "template_cu7tv3c", parms)
+    .then(function(response) {
+      console.log("SUCCESS!", response.status, response.text);
+      alert("Message sent successfully!");
+      document.getElementById("contactForm").reset();
+    })
+    .catch(function(error) {
+      console.error("Email sending failed:", error);
+      alert("Failed to send message. Please try again.");
+    });
+}

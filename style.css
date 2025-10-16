@@ -561,6 +561,15 @@ span {
     color: var(--main-color);
 }
 
+.contact .subheading {
+    text-align: center;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin-top: -2rem;    /* pulls it closer to the heading */
+    margin-bottom: 2.5rem;
+    opacity: 0.8;
+}
+
 .contact form {
     max-width: 80rem;
     margin: 1rem auto;
@@ -596,7 +605,28 @@ span {
     margin-top: 2rem;
 }
 
-/* Footeer Section Code */
+/* Extra styling for powered by section */
+.powered-by {
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+}
+
+.powered-by a {
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.powered-by a:hover {
+    text-decoration: underline;
+    color: var(--main-color);
+}
+
+/* Footer Section Code */
 
 .footer {
     position: relative;
