@@ -78,11 +78,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Responsive speed adjustments
         if (window.innerWidth <= 480) {
-            finalSpeed *= 0.4;  // fast on mobile
+            finalSpeed *= 0.05;  // fast on mobile
         } else if (window.innerWidth <= 768) {
-            finalSpeed *= 0.6;  // moderate on tablet
+            finalSpeed *= 0.1;  // moderate on tablet
         } else {
-            finalSpeed *= 0.8;  // slightly faster than base on desktop
+            finalSpeed *= 0.4;  // slightly faster than base on desktop
         }
 
         // Clamp values to ensure smooth experience
