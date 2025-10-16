@@ -17,6 +17,8 @@
     --loading-bg: var(--main-color); /* same as main brand blue */
     --glow-light: #ffeb3b; /* yellow for charging effect of the loading screen */
     --glow-strong: #ffffff; /* bright white glow for the loading screen*/
+    --scroll-distance: 0px; /* fallback distance when js is not utilized for infinite carousel */
+    --scroll-speed: 30s; /* fallback distance when js is not utilized for infinite carousel */
 }
 
 html {
@@ -286,12 +288,14 @@ span {
 }
 
 .carousel-inner {
-    display: flex;
-    width: fit-content;
-    min-width: 100%;
-    animation: scroll 30s infinite linear;
-    will-change: transform;
-    transform: translateZ(0);
+  display: flex;
+  width: fit-content;
+  min-width: 100%;
+  animation: scroll var(--scroll-speed, 30s) infinite linear;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
 }
 
 .group {
@@ -368,12 +372,12 @@ span {
 
 /* TS6. Animation that accounts for group spacing */
 @keyframes scroll {
-    0% { 
-        transform: translateX(0); 
-    }
-    100% { 
-        transform: translateX(calc(-50% - (var(--group-gap, 2rem) / 2))); 
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(var(--scroll-distance) * -1));
+  }
 }
 
 /* TS7. Set group gap CSS variable */

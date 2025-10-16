@@ -24,87 +24,88 @@ const typed = new Typed('.multiple-text', {
     });
 
 /* Multiple Infinite Carousel */
-document.addEventListener('DOMContentLoaded', function() {
-    function createInfiniteCarousels() {
-        const carouselContainers = document.querySelectorAll('.carousel-container');
+document.addEventListener('DOMContentLoaded', function () {
+  function createInfiniteCarousels() {
+    const carouselContainers = document.querySelectorAll('.carousel-container');
 
-        carouselContainers.forEach(container => {
-            const carouselInner = container.querySelector('.carousel-inner');
-            const originalGroup = container.querySelector('.original-group');
-            const itemCount = parseInt(container.getAttribute('data-items')) || 4;
+    carouselContainers.forEach(container => {
+      const carouselInner = container.querySelector('.carousel-inner');
+      const originalGroup = container.querySelector('.original-group');
+      const itemCount = parseInt(container.getAttribute('data-items')) || 4;
 
-            if (!originalGroup) return;
+      if (!originalGroup) return;
 
-            // 1. Remove previously duplicated groups to avoid buildup on resize
-            const duplicates = carouselInner.querySelectorAll('.group:not(.original-group)');
-            duplicates.forEach(dup => dup.remove());
+      // 1. Remove old duplicates
+      carouselInner.querySelectorAll('.group:not(.original-group)').forEach(dup => dup.remove());
 
-            // 2. Calculate actual group width
-            const groupWidth = calculateActualGroupWidth(originalGroup);
-            const viewportWidth = window.innerWidth;
+      // 2. Get actual group width
+      const groupWidth = calculateActualGroupWidth(originalGroup);
+      if (groupWidth <= 0) return;
 
-            // 3. Determine number of duplicates needed (fill at least 3x viewport)
-            const groupsNeeded = Math.ceil((viewportWidth * 3) / groupWidth);
+      const viewportWidth = window.innerWidth;
 
-            // 4. Create duplicates
-            for (let i = 0; i < groupsNeeded; i++) {
-                const duplicate = originalGroup.cloneNode(true);
-                duplicate.classList.remove('original-group');
-                duplicate.setAttribute('aria-hidden', 'true');
-                carouselInner.appendChild(duplicate);
-            }
+      // 3. Calculate how many duplicates are needed
+      const groupsNeeded = Math.ceil((viewportWidth * 3) / groupWidth);
 
-            // 5. Compute total content width and set animation speed
-            const totalGroups = groupsNeeded + 1;
-            const totalContentWidth = groupWidth * totalGroups;
-            setOptimalAnimationSpeed(carouselInner, totalContentWidth, itemCount);
-        });
-    }
+      // 4. Clone groups to fill the space
+      for (let i = 0; i < groupsNeeded; i++) {
+        const duplicate = originalGroup.cloneNode(true);
+        duplicate.classList.remove('original-group');
+        duplicate.setAttribute('aria-hidden', 'true');
+        carouselInner.appendChild(duplicate);
+      }
 
-    // Measure group width accurately including gap/margins.
-    function calculateActualGroupWidth(group) {
-        const rect = group.getBoundingClientRect();
-        return rect.width;
-    }
-
-    // Set animation speed based on total width, item count, and screen size.
-    function setOptimalAnimationSpeed(carouselInner, totalContentWidth, itemCount) {
-        const baseSpeedPer1000px = 12; // faster baseline than previous 15
-        const calculatedSpeed = (totalContentWidth / 1000) * baseSpeedPer1000px;
-
-        // More items → slightly faster
-        const itemCountFactor = Math.max(0.8, 6 / itemCount);
-        let finalSpeed = calculatedSpeed * itemCountFactor;
-
-        // Responsive speed adjustments
-        if (window.innerWidth <= 480) {
-            finalSpeed *= 0.05;  // fast on mobile
-        } else if (window.innerWidth <= 768) {
-            finalSpeed *= 0.1;  // moderate on tablet
-        } else {
-            finalSpeed *= 0.4;  // slightly faster than base on desktop
-        }
-
-        // Clamp values to ensure smooth experience
-        const clampedSpeed = Math.max(8, Math.min(30, finalSpeed));
-
-        carouselInner.style.animationDuration = `${clampedSpeed}s`;
-
-        // For debugging / tuning
-        console.log(`Carousel Speed: ${clampedSpeed}s | Items: ${itemCount} | Width: ${Math.round(totalContentWidth)}px`);
-    }
-
-    // Initialize on page load
-    createInfiniteCarousels();
-
-    // Re-initialize on window resize (debounced)
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            createInfiniteCarousels();
-        }, 250);
+      // 5. Adjust speed based on total width
+      const totalGroups = groupsNeeded + 1;
+      const totalContentWidth = groupWidth * totalGroups;
+      setOptimalAnimationSpeed(carouselInner, totalContentWidth, itemCount);
     });
+  }
+
+  function calculateActualGroupWidth(group) {
+    const rect = group.getBoundingClientRect();
+    return rect.width;
+  }
+
+  function setOptimalAnimationSpeed(carouselInner, totalContentWidth, itemCount) {
+    const scrollDistance = totalContentWidth - window.innerWidth;
+    carouselInner.style.setProperty('--scroll-distance', `${scrollDistance}px`);
+
+    // Base speed
+    const baseSpeedPer1000px = 12;
+    const calculatedSpeed = (scrollDistance / 1000) * baseSpeedPer1000px;
+
+    // Slightly faster if more items
+    const itemCountFactor = Math.max(0.8, 6 / itemCount);
+    let finalSpeed = calculatedSpeed * itemCountFactor;
+
+    // Responsive adjustments for mobile
+    if (window.innerWidth <= 480) {
+      finalSpeed *= 0.05;
+    } else if (window.innerWidth <= 768) {
+      finalSpeed *= 0.1;
+    } else {
+      finalSpeed *= 0.4;
+    }
+
+    const clampedSpeed = Math.max(8, Math.min(30, finalSpeed));
+
+    // ✅ Update only the CSS variable
+    carouselInner.style.setProperty('--scroll-speed', `${clampedSpeed}s`);
+
+    // Optional debug
+    console.log(
+      `Carousel Speed: ${clampedSpeed}s | Distance: ${scrollDistance}px | Total Width: ${totalContentWidth}px`
+    );
+  }
+
+  createInfiniteCarousels();
+
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(createInfiniteCarousels, 250);
+  });
 });
 
 /* EmailJS */
