@@ -289,7 +289,7 @@ span {
     display: flex;
     width: fit-content;
     min-width: 100%;
-    animation: scroll 15s infinite linear;
+    animation: scroll 30s infinite linear;
     will-change: transform;
     transform: translateZ(0);
 }
@@ -449,10 +449,6 @@ span {
     .carousel-container .group {
         gap: calc(3rem - (var(--item-count, 4) * 0.15rem));
     }
-
-    .carousel-inner {
-    animation-duration: 10s; /* faster on tablets & phones */
-    }
 }
 
 @media (max-width: 480px) {
@@ -484,10 +480,6 @@ span {
     
     .carousel-container .group {
         gap: calc(2.5rem - (var(--item-count, 4) * 0.1rem));
-    }
-
-    .carousel-inner {
-    animation-duration: 8s; /* even faster on small phones */
     }
 }
 
