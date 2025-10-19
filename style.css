@@ -194,7 +194,7 @@ span {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 5rem;
     background: var(--snd-bg-color);
     text-align: justify;
 }
@@ -247,244 +247,151 @@ span {
 /* Tech Stack Section Code */
 
 .techstack {
-    background: var(--bg-color);
-    padding: 10rem 9% 2rem;
-    text-align: center;
+  background: var(--bg-color);
+  padding: 5rem 9% 2rem;
+  text-align: center;
 }
 
 .tech-header {
-    margin-bottom: 5rem;
+  margin-bottom: 5rem;
 }
 
 .tech-header h2 {
-    font-size: 6rem;
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-    text-align: center;
+  font-size: 6rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .tech-header h3 {
-    font-size: 2rem;
-    color: var(--text-color);
-    max-width: 80rem;
-    margin: 0 auto;
-    text-align: center;
+  font-size: 2rem;
+  color: var(--text-color);
+  max-width: 80rem;
+  margin: 0 auto;
 }
 
-/* TS1. Carousel Base Styles */
-.carousel {
-    position: relative;
-    overflow: hidden;
+/* Slider Wrapper */
+.logo-slider-container {
+  margin-bottom: 4rem;
 }
 
-.carousel::before {
-  content: "";
+.category-label {
+  font-size: 2.8rem;
+  color: var(--text-color);
+  font-weight: 700;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.category-label::after {
+  content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, var(--bg-color) 0%, transparent 15%, transparent 85%, var(--bg-color) 100%);
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6rem;
+  height: 0.3rem;
+  background: var(--main-color);
+  border-radius: 1rem;
+}
+
+/* Core Slider Styles */
+.logo-slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.logo-slider::before,
+.logo-slider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 2;
   pointer-events: none;
-  z-index: 1;
 }
 
-.carousel-inner {
+.logo-slider::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-color) 0%, transparent 100%);
+}
+
+.logo-slider::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-color) 0%, transparent 100%);
+}
+
+.logo-track {
   display: flex;
-  width: fit-content;
-  min-width: 100%;
-  animation: scroll var(--scroll-speed, 30s) infinite linear;
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
+  gap: 4rem;
+  width: max-content;
+  animation: logoScroll 35s linear infinite;
 }
 
-.group {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
+.logo-slide {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--snd-bg-color);
+  border-radius: 1.5rem;
+  border: 0.2rem solid var(--snd-bg-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
 }
 
-/* TS2. Dynamic gap system based on item count */
-.carousel-container .group {
-    gap: calc(4rem - (var(--item-count, 4) * 0.25rem));
+.logo-slide img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: grayscale(20%);
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-/* TS3. Card styles with dynamic sizing */
-.card {
-    height: 14rem;
-    background: var(--bg-color);
-    border-radius: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border: 0.2rem solid var(--snd-bg-color);
-    transition: all 0.4s ease;
-    flex-shrink: 0;
+.logo-slide:hover img {
+  transform: scale(1.15);
+  filter: grayscale(0%);
 }
 
-/* TS4. Dynamic card width based on item count */
-.carousel-container[data-items="4"] .card {
-    flex: 0 0 22rem;
-    --item-count: 4;
-}
-.carousel-container[data-items="5"] .card {
-    flex: 0 0 18rem;
-    --item-count: 5;
-}
-.carousel-container[data-items="6"] .card {
-    flex: 0 0 16rem;
-    --item-count: 6;
-}
-.carousel-container[data-items="7"] .card {
-    flex: 0 0 14rem;
-    --item-count: 7;
-}
-.carousel-container[data-items="8"] .card {
-    flex: 0 0 13rem;
-    --item-count: 8;
-}
-
-.card:hover {
-    border-color: var(--main-color);
-    box-shadow: 0 12px 30px rgba(0, 119, 182, 0.25);
-}
-
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: 0.4s ease;
-    filter: grayscale(20%);
-}
-
-.card:hover img {
-    transform: scale(1.15);
-    filter: grayscale(0%);
-}
-
-/* TS5. Group spacing - proportional to card gap */
-.carousel-inner .group:not(:last-child) {
-    margin-right: calc(4rem - (var(--item-count, 4) * 0.25rem));
-}
-
-/* TS6. Animation that accounts for group spacing */
-@keyframes scroll {
+/* Infinite Scroll Animation */
+@keyframes logoScroll {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(var(--scroll-distance) * -1));
+    transform: translateX(-50%);
   }
 }
 
-/* TS7. Set group gap CSS variable */
-.carousel-container .carousel-inner {
-    --group-gap: calc(4rem - (var(--item-count, 4) * 0.25rem));
-}
-
-/* TS8. Category labels */
-.carousel-container {
-    margin-bottom: 4rem;
-}
-
-.category-label {
-    font-size: 2.8rem;
-    color: var(--text-color);
-    font-weight: 700;
-    margin-bottom: 3rem;
-    position: relative;
-}
-
-.category-label::after {
-    content: '';
-    position: absolute;
-    bottom: -1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6rem;
-    height: 0.3rem;
-    background: var(--main-color);
-    border-radius: 1rem;
-}
-
-/* TS9. Responsive adjustments with proportional scaling */
+/* Responsive Sizing */
 @media (max-width: 1200px) {
-    .carousel-container[data-items="4"] .card { flex: 0 0 20rem; }
-    .carousel-container[data-items="5"] .card { flex: 0 0 16rem; }
-    .carousel-container[data-items="6"] .card { flex: 0 0 14rem; }
-    .carousel-container[data-items="7"] .card { flex: 0 0 12rem; }
-    .carousel-container[data-items="8"] .card { flex: 0 0 11rem; }
-    
-    .carousel-container .group {
-        gap: calc(3.5rem - (var(--item-count, 4) * 0.2rem));
-    }
+  .logo-slide img {
+    width: 90px;
+    height: 90px;
+  }
 }
 
 @media (max-width: 768px) {
-    .carousel-container[data-items="4"] .card { 
-        flex: 0 0 18rem; 
-        height: 12rem;
-        padding: 1.5rem;
-    }
-    .carousel-container[data-items="5"] .card { 
-        flex: 0 0 15rem;
-        height: 12rem;
-        padding: 1.5rem;
-    }
-    .carousel-container[data-items="6"] .card { 
-        flex: 0 0 13rem;
-        height: 12rem;
-        padding: 1.5rem;
-    }
-    .carousel-container[data-items="7"] .card { 
-        flex: 0 0 11rem;
-        height: 12rem;
-        padding: 1.5rem;
-    }
-    .carousel-container[data-items="8"] .card { 
-        flex: 0 0 10rem;
-        height: 12rem;
-        padding: 1.5rem;
-    }
-    
-    .carousel-container .group {
-        gap: calc(3rem - (var(--item-count, 4) * 0.15rem));
-    }
+  .logo-slide img {
+    width: 70px;
+    height: 70px;
+  }
+  .logo-track {
+    gap: 2.5rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .carousel-container[data-items="4"] .card { 
-        flex: 0 0 16rem;
-        height: 10rem;
-        padding: 1rem;
-    }
-    .carousel-container[data-items="5"] .card { 
-        flex: 0 0 13rem;
-        height: 10rem;
-        padding: 1rem;
-    }
-    .carousel-container[data-items="6"] .card { 
-        flex: 0 0 11rem;
-        height: 10rem;
-        padding: 1rem;
-    }
-    .carousel-container[data-items="7"] .card { 
-        flex: 0 0 10rem;
-        height: 10rem;
-        padding: 1rem;
-    }
-    .carousel-container[data-items="8"] .card { 
-        flex: 0 0 9rem;
-        height: 10rem;
-        padding: 1rem;
-    }
-    
-    .carousel-container .group {
-        gap: calc(2.5rem - (var(--item-count, 4) * 0.1rem));
-    }
+  .logo-slide img {
+    width: 60px;
+    height: 60px;
+  }
+  .logo-track {
+    gap: 2rem;
+  }
 }
 
 /* Projects Section Code */
